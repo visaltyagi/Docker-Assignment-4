@@ -1,0 +1,18 @@
+sudo apt-get update
+sudo apt-get install docker.io -y
+sudo su -
+systemctl status docker
+  
+vim Dockerfile
+
+FROM ubuntu
+RUN apt-get update
+RUN apt-get install apache2 -y
+RUN apt-get install apache2-utils -y
+RUN apt-get clean
+ENTRYPOINT apache2ctl -D FOREGROUND
+
+sudo docker build -t assignment4 .
+docker images
+docker container run –itd –p 80:80 - name testcont assignment4
+docker container ls -a
